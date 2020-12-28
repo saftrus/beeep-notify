@@ -99,7 +99,6 @@ func toastNotification(title, message, appIcon string) toast.Notification {
 		Icon:    appIcon,
 		Actions: []toast.Action{
 			{"protocol", "I'm a button", ""},
-			{"protocol", "Me too!", ""},
 			{"protocol", "Me tooasdasd!", ""},
 		},
 	}
