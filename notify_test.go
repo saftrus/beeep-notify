@@ -5,7 +5,8 @@ import (
 )
 
 func TestNotify(t *testing.T) {
-	err := Notify("Notify title", "Message body", "assets/information.png")
+	var action [][]string
+	err := Notify("Notify title", "Message body", "assets/information.png", action)
 	if err != nil {
 		t.Error(err)
 	}

@@ -38,10 +38,22 @@ func init() {
 	}
 }
 
+func conv(actionTemp [][]string) []toast.Action {
+	var action []toast.Action
+	for _, h := range actionTemp {
+		var a toast.Action
+		a.Type = h[0]
+		a.Label = h[1]
+		a.Arguments = h[2]
+		action = append(action, a)
+	}
+	return action
+}
+
 // Notify sends desktop notification.
-func Notify(title, message, appIcon string) error {
+func Notify(title, message, appIcon string, actionTemp [][]string) error {
 	if isWindows10 {
-		return toastNotify(title, message, appIcon)
+		return toastNotify(title, message, appIcon, actionTemp)
 	}
 
 	err := baloonNotify(title, message, appIcon, false)
@@ -86,21 +98,19 @@ func baloonNotify(title, message, appIcon string, bigIcon bool) error {
 	return tray.ShowMessage(title, message, bigIcon)
 }
 
-func toastNotify(title, message, appIcon string) error {
-	notification := toastNotification(title, message, pathAbs(appIcon))
+func toastNotify(title, message, appIcon string, action [][]string) error {
+	notification := toastNotification(title, message, pathAbs(appIcon), action)
 	return notification.Push()
 }
 
-func toastNotification(title, message, appIcon string) toast.Notification {
+func toastNotification(title, message, appIcon string, actionTemp [][]string) toast.Notification {
+	action := conv(actionTemp)
 	return toast.Notification{
 		AppID:   applicationID,
 		Title:   title,
 		Message: message,
 		Icon:    appIcon,
-		Actions: []toast.Action{
-			{"protocol", "I'm a button", ""},
-			{"protocol", "Me too!", ""},
-		},
+		Actions: action,
 	}
 }
 
