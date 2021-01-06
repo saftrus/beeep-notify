@@ -17,7 +17,7 @@ import (
 )
 
 var isWindows10 bool
-applicationID := "Cylogic"
+var applicationID string
 
 func init() {
 	k, err := registry.OpenKey(registry.LOCAL_MACHINE, `SOFTWARE\Microsoft\Windows NT\CurrentVersion`, registry.QUERY_VALUE)
