@@ -34,7 +34,7 @@ func init() {
 	isWindows10 = maj == 10
 
 	if isWindows10 {
-		applicationID = appID()
+		applicationID = "Cylogic"
 	}
 }
 
