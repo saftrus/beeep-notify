@@ -1,4 +1,4 @@
-module github.com/Deepak-dash007/beeep
+module github.com/saftrus/beep_updated
 
 go 1.14
 
