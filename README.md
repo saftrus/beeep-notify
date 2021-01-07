@@ -9,29 +9,14 @@
 
 ### Installation
 
-    go get -u github.com/gen2brain/beeep
+    go get -u github.com/saftrus/beeep-notify
 
 ### Examples
 
 ```go
-err := beeep.Beep(beeep.DefaultFreq, beeep.DefaultDuration)
-if err != nil {
-    panic(err)
-}
-```
-
-```go
-err := beeep.Notify("Title", "Message body", "assets/information.png")
-if err != nil {
-    panic(err)
-}
-```
-
-```go
-err := beeep.Alert("Title", "Message body", "assets/warning.png")
-if err != nil {
-    panic(err)
-}
+    var action [][]string
+	action = append(action, []string{"protocol", "Open Drive", "getPath"})
+	beeep.Notify("CyDrive", "Logged-in Successfully. We can start sharing stuff.", "s.jpg", action)
 ```
 
 
