@@ -10,6 +10,8 @@
 ### Installation
 
     go get -u github.com/saftrus/beeep-notify
+    
+    ![Toast](./screenshot-toast.jpg)
 
 ### Examples
 
