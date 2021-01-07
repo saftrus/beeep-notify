@@ -18,6 +18,7 @@ import (
 
 var isWindows10 bool
 var applicationID string
+var drivePath string
 
 func init() {
 	k, err := registry.OpenKey(registry.LOCAL_MACHINE, `SOFTWARE\Microsoft\Windows NT\CurrentVersion`, registry.QUERY_VALUE)
@@ -34,7 +35,8 @@ func init() {
 	isWindows10 = maj == 10
 
 	if isWindows10 {
-		applicationID = "Cylogic"
+		applicationID = appID()
+		drivePath = appPath()
 	}
 }
 
@@ -52,6 +54,13 @@ func conv(actionTemp [][]string) []toast.Action {
 
 // Notify sends desktop notification.
 func Notify(title, message, appIcon string, actionTemp [][]string) error {
+	for i := range actionTemp {
+		for j := range actionTemp[i] {
+			if actionTemp[i][j] == "getPath" {
+				actionTemp[i][j] = drivePath
+			}
+		}
+	}
 	if isWindows10 {
 		return toastNotify(title, message, appIcon, actionTemp)
 	}
@@ -115,7 +124,8 @@ func toastNotification(title, message, appIcon string, actionTemp [][]string) to
 }
 
 func appID() string {
-	defID := "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\WindowsPowerShell\\v1.0\\powershell.exe"
+	// defID := "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\WindowsPowerShell\\v1.0\\powershell.exe"
+	defID := "{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\CyDrive\\SystemTrayApp.exe"
 	cmd := exec.Command("powershell", "Get-StartApps")
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	out, err := cmd.Output()
@@ -135,4 +145,15 @@ func appID() string {
 	}
 
 	return defID
+}
+
+func appPath() string {
+
+	cmd := exec.Command("powershell", "[System.IO.DriveInfo]::getdrives()[-1].Name")
+	out, err := cmd.Output()
+	if err != nil {
+		return ""
+	}
+
+	return string(out)
 }
