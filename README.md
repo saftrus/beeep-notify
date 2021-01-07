@@ -10,8 +10,6 @@
 ### Installation
 
     go get -u github.com/saftrus/beeep-notify
-    
-    ![Toast](./screenshot-toast.jpg)
 
 ### Examples
 
@@ -21,6 +19,7 @@
 	beeep.Notify("CyDrive", "Logged-in Successfully. We can start sharing stuff.", "s.jpg", action)
 ```
 
+![Toast](./screenshot-toast.jpg)
 
 ## macOS
 
