@@ -14,9 +14,9 @@
 ### Examples
 
 ```go
-    var action [][]string
-	action = append(action, []string{"protocol", "Open Drive", "getPath"})
-	beeep.Notify("CyDrive", "Logged-in Successfully. We can start sharing stuff.", "s.jpg", action)
+var action [][]string
+action = append(action, []string{"protocol", "Open Drive", "getPath"})
+beeep.Notify("CyDrive", "Logged-in Successfully. We can start sharing stuff.", "s.jpg", action)
 ```
 
 ![Toast](./screenshot-toast.jpg)
