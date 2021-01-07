@@ -1,4 +1,4 @@
-module github.com/saftrus/beep_updated
+module github.com/saftrus/beeep-notify
 
 go 1.14
 
