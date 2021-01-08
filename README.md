@@ -19,8 +19,6 @@ action = append(action, []string{"protocol", "Open Drive", "getPath"})
 beeep.Notify("CyDrive", "Logged-in Successfully. We can start sharing stuff.", "s.jpg", action)
 ```
 
-![Toast](./screenshot-toast.jpg)
-
 ## macOS
 
 For icons to show up when using Alert() or Notify(), you will need to bundle your application
